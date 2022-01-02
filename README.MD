@@ -1,4 +1,4 @@
-#Afstand Edge Service
+# Afstand Edge Service
 Dit is de repository voor de afstand-edge-service microservice. Deze Edge service verbindt naar 2 back-end microservice: de ene is rit-service en draait onder een MySQL database, en de andere is vrachtwagen-service; deze draait dan onder MongoDB.
 
 
