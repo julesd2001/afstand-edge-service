@@ -4,18 +4,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RitAfstand {
-    private String afstand;
+    private List<Afstand> afstand;
+    private String totaleAfstand;
     private String nummerplaat;
     private String bedrijf;
-    private String ritId;
+//    private String ritId;
 
-    public RitAfstand(Rit rit, Vrachtwagen vrachtwagen) {
+    public RitAfstand(Vrachtwagen vrachtwagen, List<Rit> ritten) {
+        afstand = new ArrayList<>();
+        ritten.forEach(rit -> {
+            afstand.add(new Afstand(rit.getRitId(),
+                    rit.getRitlengte()));
+        });
         setAfstand(afstand);
-        vrachtwagen.setNummerplaat(vrachtwagen.getNummerplaat());
-        vrachtwagen.setBedrijf(vrachtwagen.getBedrijf());
-        rit.setRitId(rit.getRitId());
+        setNummerplaat(vrachtwagen.getNummerplaat());
+        setBedrijf(vrachtwagen.getBedrijf());
     }
 
+    public RitAfstand(Vrachtwagen vrachtwagen, Rit rit) {
+        afstand = new ArrayList<>();
+        afstand.add(new Afstand(rit.getRitId(), rit.getRitlengte()));
+        setAfstand(afstand);
+        setNummerplaat(vrachtwagen.getNummerplaat());
+        setBedrijf(vrachtwagen.getBedrijf());
+    }
+
+    public List<Afstand> getAfstand() {
+        return afstand;
+    }
+
+    public void setAfstand(List<Afstand> afstand) {
+        this.afstand = afstand;
+    }
+
+    public String getTotaleAfstand() {
+        return totaleAfstand;
+    }
+
+    public void setTotaleAfstand(String totaleAfstand) {
+        this.totaleAfstand = totaleAfstand;
+    }
 
     public String getNummerplaat() {
         return nummerplaat;
@@ -33,19 +61,12 @@ public class RitAfstand {
         this.bedrijf = bedrijf;
     }
 
-    public String getRitId() {
-        return ritId;
-    }
+//    public String getRitId() {
+//        return ritId;
+//    }
+//
+//    public void setRitId(String ritId) {
+//        this.ritId = ritId;
+//    }
 
-    public void setRitId(String ritId) {
-        this.ritId = ritId;
-    }
-
-    public String getAfstand() {
-        return afstand;
-    }
-
-    public void setAfstand(String afstand) {
-        this.afstand = afstand;
-    }
 }
