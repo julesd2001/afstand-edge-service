@@ -22,27 +22,48 @@ public class VrachtwagenRitAfstandController {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Value("${VRACHTWAGEN_SERVICE_BASEURL:localhost:8052}")
+    @Value("${vrachtwagenservice.baseurl}")
     private String vrachtwagenServiceBaseUrl;
 
-    @Value("${RIT_SERVICE_BASEURL:localhost:8051}")
+    @Value("${ritservice.baseurl}")
     private String ritServiceBaseUrl;
 
-    @GetMapping("/vrachtwagens/nummerplaat/{nummerplaat}/ritten")
-    public List<RitAfstand> getRitAfstandForVrachtwagenPerBedrijfPerVrachtwagen(@PathVariable String nummerplaat) {
-        List<RitAfstand> returnList = new ArrayList<>();
-        ResponseEntity<List<Vrachtwagen>> responseEntityVrachtwagens =
-            restTemplate.exchange("http://" + vrachtwagenServiceBaseUrl + "/vrachtwagens/nummerplaat/{nummerplaat}", HttpMethod.GET, null, new ParameterizedTypeReference<List<Vrachtwagen>>() {
-            }, nummerplaat);
+//    @GetMapping("/vrachtwagens/nummerplaat/{nummerplaat}/ritten")
+//    public List<RitAfstand> getRitAfstandForVrachtwagenByNummerplaat(@PathVariable String nummerplaat) {
+//
+//        List<RitAfstand> returnList = new ArrayList();
+//
+//        ResponseEntity<List<Vrachtwagen>> responseEntityVrachtwagens =
+//            restTemplate.exchange("http://" + vrachtwagenServiceBaseUrl + "/vrachtwagens/nummerplaat/{nummerplaat}",
+//                    HttpMethod.GET, null, new ParameterizedTypeReference<List<Vrachtwagen>>() {
+//                    }, nummerplaat);
+//
+//        List<Vrachtwagen> vrachtwagens = responseEntityVrachtwagens.getBody();
+//
+//        for (Vrachtwagen vrachtwagen :
+//                vrachtwagens) {
+//            Rit rit =
+//                    restTemplate.getForObject("http://" + ritServiceBaseUrl + "/ritten/{nummerplaat}",
+//                            Rit.class, vrachtwagen.getNummerplaat());
+//
+//            returnList.add(new RitAfstand(rit, vrachtwagen));
+//        }
+//
+//        return returnList;
+//    }
 
-        List<Vrachtwagen> vrachtwagens = responseEntityVrachtwagens.getBody();
-        for (Vrachtwagen vrachtwagen : vrachtwagens) {
-            Rit rit = restTemplate.getForObject("http://" + ritServiceBaseUrl + "/ritten/{nummerplaat}", Rit.class, vrachtwagen.getNummerplaat());
+    @GetMapping("/ritten/nummerplaat/{nummerplaat}")
+    public RitAfstand getRittenByNummerplaat(@PathVariable String nummerplaat){
+        Vrachtwagen vrachtwagen =
+                restTemplate.getForObject("http://" + vrachtwagenServiceBaseUrl + "/vrachtwagens/nummerplaat/{nummerplaat}",
+                        Vrachtwagen.class, nummerplaat);
 
-            returnList.add(new RitAfstand(rit, vrachtwagen));
-        }
+        ResponseEntity<List<Rit>> responseEntityRitten =
+                restTemplate.exchange("http://" + ritServiceBaseUrl + "/ritten/nummerplaat/{nummerplaat}",
+                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Rit>>() {
+                        }, nummerplaat);
 
-        return returnList;
+        return new RitAfstand(vrachtwagen,responseEntityRitten.getBody());
     }
 
 
