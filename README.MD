@@ -16,6 +16,10 @@ U kan deze back-end services hier bekijken:
 
 Met onze edge-service willen we deze zaken beide combineren: bijvoorbeeld de totale afstand opvragen dat 1 vrachtwagen heeft afgelegd op basis van alle ritafstanden. 
 
+# Swagger UI implementatie:
+![image](https://user-images.githubusercontent.com/57659236/148543983-749f6b4c-a7ea-49ed-9920-a6b6bf1a3449.png)
+
+
 # GET /totaleafstand/nummerplaat/{nummerplaat}
 Met deze request halen we de totale afstand op voor alle vrachtwagens met het nummerplaat dat meegegeven wordt.
 
