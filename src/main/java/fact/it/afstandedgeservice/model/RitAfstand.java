@@ -5,10 +5,12 @@ import java.util.List;
 
 public class RitAfstand {
     private List<Afstand> afstand;
-    private String totaleAfstand;
+    private int totaleAfstand;
     private String nummerplaat;
     private String bedrijf;
-//    private String ritId;
+    private String merk;
+    private String model;
+    private String bouwjaar;
 
     public RitAfstand(Vrachtwagen vrachtwagen, List<Rit> ritten) {
         afstand = new ArrayList<>();
@@ -17,16 +19,28 @@ public class RitAfstand {
                     rit.getRitlengte()));
         });
         setAfstand(afstand);
+        for (Rit rit : ritten) {
+                totaleAfstand += rit.getRitlengte();
+        }
+        setTotaleAfstand(totaleAfstand);
         setNummerplaat(vrachtwagen.getNummerplaat());
         setBedrijf(vrachtwagen.getBedrijf());
+        setMerk(vrachtwagen.getMerk());
+        setModel(vrachtwagen.getModel());
+        setBouwjaar(vrachtwagen.getBouwjaar());
     }
 
     public RitAfstand(Vrachtwagen vrachtwagen, Rit rit) {
         afstand = new ArrayList<>();
         afstand.add(new Afstand(rit.getRitId(), rit.getRitlengte()));
         setAfstand(afstand);
+        totaleAfstand += rit.getRitlengte();
+        setTotaleAfstand(totaleAfstand);
         setNummerplaat(vrachtwagen.getNummerplaat());
         setBedrijf(vrachtwagen.getBedrijf());
+        setMerk(vrachtwagen.getMerk());
+        setModel(vrachtwagen.getModel());
+        setBouwjaar(vrachtwagen.getBouwjaar());
     }
 
     public List<Afstand> getAfstand() {
@@ -37,11 +51,11 @@ public class RitAfstand {
         this.afstand = afstand;
     }
 
-    public String getTotaleAfstand() {
+    public int getTotaleAfstand() {
         return totaleAfstand;
     }
 
-    public void setTotaleAfstand(String totaleAfstand) {
+    public void setTotaleAfstand(int totaleAfstand) {
         this.totaleAfstand = totaleAfstand;
     }
 
@@ -61,12 +75,28 @@ public class RitAfstand {
         this.bedrijf = bedrijf;
     }
 
-//    public String getRitId() {
-//        return ritId;
-//    }
-//
-//    public void setRitId(String ritId) {
-//        this.ritId = ritId;
-//    }
+    public String getMerk() {
+        return merk;
+    }
+
+    public void setMerk(String merk) {
+        this.merk = merk;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getBouwjaar() {
+        return bouwjaar;
+    }
+
+    public void setBouwjaar(String bouwjaar) {
+        this.bouwjaar = bouwjaar;
+    }
 
 }
