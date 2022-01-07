@@ -46,9 +46,14 @@ Met deze request halen we de totale afstand op van de vrachtwagen met een gegeve
 
 # POST /totaleafstand
 Door een nummerplaat en een ritId mee te geven aan deze POST request kunnen we een nieuwe ritafstand object aanmaken op basis van een rit en een vrachtwagen.
+![image](https://user-images.githubusercontent.com/57659236/148548883-d64d5a6a-33a6-4ed3-b906-17654ffb98fc.png)
+
 
 # PUT /totaleafstand
 Deze request gebruiken we indien we een ritafstand willen aanpassen.
+![image](https://user-images.githubusercontent.com/57659236/148548931-88e99338-6251-47b6-9094-afb16a5b5b1d.png)
+
 
 # DELETE /totaleafstand/{ritId}
 Voor deze request zullen we gewoon één enkele rit kunnen verwijderen. Dit door de ritId mee te geven aan deze request.
+![image](https://user-images.githubusercontent.com/57659236/148549158-a0d5626e-80fb-4fb7-9972-3d5c5d11fc35.png)
