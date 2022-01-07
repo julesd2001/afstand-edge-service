@@ -94,6 +94,7 @@ public class VrachtwagenRitAfstandController {
     public RitAfstand addRit(@RequestParam int ritlengte, @RequestParam String vertrekpunt, @RequestParam String bestemming, @RequestParam int begingewicht,
                              @RequestParam String ritId, @RequestParam String cargoId, @RequestParam String nummerplaat){
 
+
         Rit rit =
                 restTemplate.postForObject("http://" + ritServiceBaseUrl + "/ritten",
                         new Rit(ritlengte,vertrekpunt,bestemming,begingewicht,ritId,cargoId,nummerplaat), Rit.class);
